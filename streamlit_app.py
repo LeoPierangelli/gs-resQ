@@ -7,9 +7,23 @@ if 'dados_usuarios' not in st.session_state:
     }
 
 st.session_state['pedidos_ajuda'] = [
-        {"latitude": -23.5505, "longitude": -46.6333, "descricao": "Ajuda médica urgente"},
-        {"latitude": -23.5510, "longitude": -46.6340, "descricao": "Necessita de alimentos"},
-    ]
+    {
+        "id": 1,
+        "descricao": "Ajuda médica urgente",
+        "categoria": "Saúde",
+        "usuario": "joao123",
+        "latitude": -23.5505,
+        "longitude": -46.6333
+    },
+    {
+        "id": 2,
+        "descricao": "Necessita de alimentos",
+        "categoria": "Alimentos",
+        "usuario": "maria456",
+        "latitude": -23.5510,
+        "longitude": -46.6340
+    }
+]
 
 # Definindo as páginas
 cadastro_page = st.Page("pages/cadastro.py", title="Cadastro")
