@@ -15,10 +15,9 @@ st.session_state['pedidos_ajuda'] = [
 cadastro_page = st.Page("pages/cadastro.py", title="Cadastro")
 mapa_page = st.Page("pages/mapa.py", title="Mapa")
 perfil_page = st.Page("pages/perfil.py", title="Perfil")
-historico_page = st.Page("pages/historico.py", title="Historico")
 
 # Configurando a navegação
-pg = st.navigation([cadastro_page, mapa_page, perfil_page, historico_page])
+pg = st.navigation([cadastro_page, mapa_page, perfil_page])
 
 # Executando a página selecionada
 pg.run()
