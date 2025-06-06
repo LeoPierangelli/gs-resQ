@@ -92,6 +92,7 @@ with col2:
                 st.success("Pedido criado com sucesso!")
                 st.rerun()
 
+# Seção de busca de pedidos
 st.write("### Buscar pedido por ID")
 busca_id = st.number_input("Digite o ID do pedido", min_value=1, step=1)
 if st.button("Buscar"):
