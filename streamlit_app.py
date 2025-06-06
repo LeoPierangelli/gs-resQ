@@ -12,15 +12,13 @@ st.session_state['pedidos_ajuda'] = [
     ]
 
 # Definindo as páginas
-login_page = st.Page("pages/login.py", title="Login")
-criar_conta_page = st.Page("pages/criar_conta.py", title="Criar Conta")
+cadastro_page = st.Page("pages/cadastro.py", title="Cadastro")
 mapa_page = st.Page("pages/mapa.py", title="Mapa")
 perfil_page = st.Page("pages/perfil.py", title="Perfil")
 historico_page = st.Page("pages/historico.py", title="Historico")
-criar_pedido_page = st.Page("pages/criar_pedido.py", title="Criar Pedido")
 
 # Configurando a navegação
-pg = st.navigation([login_page, criar_conta_page, mapa_page, perfil_page, criar_pedido_page, historico_page])
+pg = st.navigation([cadastro_page, mapa_page, perfil_page, historico_page])
 
 # Executando a página selecionada
 pg.run()
