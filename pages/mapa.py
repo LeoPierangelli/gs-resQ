@@ -98,18 +98,14 @@ if st.button("Buscar"):
     pedido_encontrado = next((p for p in st.session_state['pedidos_ajuda'] if p['id'] == busca_id), None)
 
     if pedido_encontrado:
+        geolocator = Nominatim(user_agent="resq-app")
+        location_pedido = geolocator.reverse((pedido_encontrado["latitude"], pedido_encontrado["longitude"]))
+
         st.success("Pedido encontrado:")
         st.write(f"**Usuário:** {pedido_encontrado['usuario']}")
         st.write(f"**Categoria:** {pedido_encontrado['categoria']}")
         st.write(f"**Descrição:** {pedido_encontrado['descricao']}")
+        st.write(f"**Endereço:** {location_pedido.address}")
 
-        # Obter endereço a partir da latitude e longitude do pedido
-        geolocator = Nominatim(user_agent="resq-app")
-        location_pedido = geolocator.reverse((pedido_encontrado["latitude"], pedido_encontrado["longitude"]))
-
-        if location_pedido:
-            st.write(f"**Endereço:** {location_pedido.address}")
-        else:
-            st.write("Endereço não encontrado.")
     else:
         st.error("Nenhum pedido encontrado com esse ID.")
