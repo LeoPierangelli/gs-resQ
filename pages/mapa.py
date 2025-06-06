@@ -8,6 +8,10 @@ from streamlit_folium import st_folium
 st.title("Mapa")
 st.write(f"Bem-vindo, {st.session_state['usuario_logado']}!")
 
+# Botão para criar novo pedido
+if st.button("Criar Novo Pedido"):
+    st.switch_page("pages/criar_pedido.py")
+
 location = streamlit_geolocation()
 
 if location['latitude'] is None or location['latitude'] == []:
