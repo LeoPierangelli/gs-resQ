@@ -5,15 +5,8 @@ from streamlit_folium import st_folium
 from datetime import datetime
 from geopy.geocoders import Nominatim
 
-st.session_state['Ele quer ajudar'] = 0
-
-if 'usuario_logado' not in st.session_state:
-    st.warning("Por favor, faça login para ver seu perfil.")
-    st.stop()
-
 st.title("Mapa")
 
-# Verificar se o usuário está logado
 if 'usuario_logado' not in st.session_state:
     st.warning("Por favor, faça login para acessar o mapa.")
     st.stop()

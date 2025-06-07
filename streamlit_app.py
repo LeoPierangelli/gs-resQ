@@ -1,5 +1,7 @@
 import streamlit as st
-
+#Leonardo de Souza Pierangelli RM560501
+#Leandro Kamada RM560381
+#Pedro Arão Baquini RM559580
 if 'dados_usuarios' not in st.session_state:
     st.session_state['dados_usuarios'] = {
         'nomes': [],
