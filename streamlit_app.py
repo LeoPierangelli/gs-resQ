@@ -1,13 +1,18 @@
-import streamlit as st
 #Leonardo de Souza Pierangelli RM560501
 #Leandro Kamada RM560381
 #Pedro Arão Baquini RM559580
+
+import streamlit as st
+#Utilizamos a biblioteca streamlit para que o projeto fique na web e tenha uma interface
+
+#aqui criamos o banco de dados com as informações de login dos usuários
 if 'dados_usuarios' not in st.session_state:
     st.session_state['dados_usuarios'] = {
         'nomes': [],
         'senhas': []
     }
 
+#aqui armazenamos os pedidos de ajuda
 st.session_state['pedidos_ajuda'] = [
     {
         "id": 1,
@@ -31,14 +36,13 @@ st.session_state['pedidos_ajuda'] = [
     }
 ]
 
-# Definindo as páginas
+#Páginas
 cadastro_page = st.Page("pages/cadastro.py", title="Cadastro")
 mapa_page = st.Page("pages/mapa.py", title="Mapa")
 perfil_page = st.Page("pages/perfil.py", title="Perfil")
 
-# Configurando a navegação
+#Navegação
 pg = st.navigation([cadastro_page, mapa_page, perfil_page])
 
-# Executando a página selecionada
 pg.run()
 
