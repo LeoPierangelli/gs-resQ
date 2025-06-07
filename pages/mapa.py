@@ -6,7 +6,7 @@ from datetime import datetime
 from geopy.geocoders import Nominatim
 
 if 'usuario_logado' not in st.session_state:
-    st.warning("Por favor, faça login para ver seu perfil.")
+    st.warning("Por favor, faça login para acessar o mapa.")
     st.stop()
 
 st.title("Mapa")
