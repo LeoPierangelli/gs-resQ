@@ -19,7 +19,7 @@ if 'historico_pedidos' in st.session_state:
     pedidos_usuario = [p for p in st.session_state['historico_pedidos'] if p['usuario'] == st.session_state['usuario_logado']]
     total_pedidos = len(pedidos_usuario)
     pedidos_pendentes = len([p for p in pedidos_usuario if p['status'] == 'Pendente'])
-    
+
     col1, col2 = st.columns(2)
     with col1:
         st.metric("Total de Pedidos", total_pedidos)
@@ -36,12 +36,14 @@ if 'historico_pedidos' in st.session_state and pedidos_usuario:
     #Ordenar por data
     if 'data' in df.columns:
         df = df.sort_values('data', ascending=False)
-    
+
     #Exibindo pedidos
     for _, pedido in df.iterrows():
         with st.expander(f"Pedido de {pedido.get('data', 'Data não disponível')} - {pedido.get('tipo', 'Sem tipo')}"):
+            st.write(f"**Id:** {pedido.get('id', 'N/A')}")
             st.write(f"**Descrição:** {pedido.get('descricao', 'N/A')}")
             st.write(f"**Localização:** Latitude {pedido.get('latitude', 'N/A')}, Longitude {pedido.get('longitude', 'N/A')}")
             st.write(f"**Status:** {pedido.get('status', 'Pendente')}")
+
 else:
     st.info("Você ainda não tem pedidos registrados.")
