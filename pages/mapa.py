@@ -5,6 +5,8 @@ from streamlit_folium import st_folium
 from datetime import datetime
 from geopy.geocoders import Nominatim
 
+st.session_state['Ele quer ajudar'] = 0
+
 if 'usuario_logado' not in st.session_state:
     st.warning("Por favor, faça login para ver seu perfil.")
     st.stop()
@@ -100,7 +102,6 @@ with col2:
                 st.session_state['historico_pedidos'].append(novo_pedido)
                 
                 st.success("Pedido criado com sucesso!")
-                st.rerun()
 
 # Seção de busca de pedidos
 st.write("### Buscar pedido por ID")
@@ -117,11 +118,10 @@ if st.button("Buscar"):
         st.write(f"**Tipo:** {pedido_encontrado['tipo']}")
         st.write(f"**Descrição:** {pedido_encontrado['descricao']}")
         st.write(f"**Status:** {pedido_encontrado['status']}")
-
+        st.success(f"**Endereço:** {location_pedido.address}")
 
         if st.button("Quero ajudar"):
-            pedido_encontrado['status'] = "Sendo assistido"
-            st.success(f"**Envie sua assistência para esse local:** {location_pedido.address}")
+            pedido_encontrado['status'] = "Em andamento"
 
     else:
         st.error("Nenhum pedido encontrado com esse ID.")
