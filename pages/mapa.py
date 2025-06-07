@@ -5,6 +5,10 @@ from streamlit_folium import st_folium
 from datetime import datetime
 from geopy.geocoders import Nominatim
 
+if 'usuario_logado' not in st.session_state:
+    st.warning("Por favor, faça login para ver seu perfil.")
+    st.stop()
+
 st.title("Mapa")
 st.write(f"Bem-vindo, {st.session_state['usuario_logado']}!")
 
@@ -36,7 +40,7 @@ with col1:
         for pedido in st.session_state['pedidos_ajuda']:
             folium.Marker(
                 [pedido["latitude"], pedido["longitude"]],
-                tooltip=f"ID {pedido['id']}: {pedido['descricao']}",
+                tooltip=f"ID {pedido['id']}: {pedido['tipo']}",
                 icon=folium.Icon(color="red", icon="user")
             ).add_to(mapa)
 
@@ -47,13 +51,12 @@ with col2:
     
     # Formulário para criar pedido
     with st.form("criar_pedido_form"):
-        titulo = st.text_input("Título do Pedido")
-        descricao = st.text_area("Descrição do Pedido")
         tipo = st.selectbox(
             "Tipo de Pedido",
             ["Ajuda Médica", "Alimentos", "Roupas", "Abrigo", "Outros"]
         )
-        
+        descricao = st.text_area("Descrição do Pedido")
+
         # Mostrar localização atual
         st.write("Sua localização atual:")
         st.write(f"Latitude: {location['latitude']}")
@@ -62,18 +65,19 @@ with col2:
         submitted = st.form_submit_button("Criar Pedido")
         
         if submitted:
-            if not titulo or not descricao:
+            if not descricao:
                 st.error("Por favor, preencha todos os campos obrigatórios.")
             else:
+                novo_id = max(p['id'] for p in st.session_state['pedidos_ajuda']) + 1
                 # Criar novo pedido
                 novo_pedido = {
-                    "titulo": titulo,
+                    "id": novo_id,
                     "descricao": descricao,
                     "tipo": tipo,
+                    "usuario": st.session_state['usuario_logado'],
                     "latitude": location['latitude'],
                     "longitude": location['longitude'],
                     "data": datetime.now().strftime("%d/%m/%Y %H:%M"),
-                    "usuario": st.session_state['usuario_logado'],
                     "status": "Pendente"
                 }
                 
@@ -102,10 +106,15 @@ if st.button("Buscar"):
         location_pedido = geolocator.reverse((pedido_encontrado["latitude"], pedido_encontrado["longitude"]))
 
         st.success("Pedido encontrado:")
-        st.write(f"**Usuário:** {pedido_encontrado['usuario']}")
-        st.write(f"**Categoria:** {pedido_encontrado['categoria']}")
+        st.write(f"**Usuário:** {pedido_encontrado['usuario']} - {pedido_encontrado['data']}")
+        st.write(f"**Tipo:** {pedido_encontrado['tipo']}")
         st.write(f"**Descrição:** {pedido_encontrado['descricao']}")
-        st.write(f"**Endereço:** {location_pedido.address}")
+        st.write(f"**Status:** {pedido_encontrado['status']}")
+
+
+        if st.button("Quero ajudar"):
+            pedido_encontrado['status'] = "Sendo assistido"
+            st.success(f"**Envie sua assistência para esse local:** {location_pedido.address}")
 
     else:
         st.error("Nenhum pedido encontrado com esse ID.")

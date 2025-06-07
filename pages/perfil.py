@@ -41,8 +41,7 @@ if 'historico_pedidos' in st.session_state and pedidos_usuario:
     
     # Exibir os pedidos
     for _, pedido in df.iterrows():
-        with st.expander(f"Pedido de {pedido.get('data', 'Data não disponível')} - {pedido.get('titulo', 'Sem título')}"):
-            st.write(f"**Tipo:** {pedido.get('tipo', 'N/A')}")
+        with st.expander(f"Pedido de {pedido.get('data', 'Data não disponível')} - {pedido.get('tipo', 'Sem tipo')}"):
             st.write(f"**Descrição:** {pedido.get('descricao', 'N/A')}")
             st.write(f"**Localização:** Latitude {pedido.get('latitude', 'N/A')}, Longitude {pedido.get('longitude', 'N/A')}")
             st.write(f"**Status:** {pedido.get('status', 'Pendente')}")

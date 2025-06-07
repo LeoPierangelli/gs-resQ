@@ -9,19 +9,23 @@ if 'dados_usuarios' not in st.session_state:
 st.session_state['pedidos_ajuda'] = [
     {
         "id": 1,
-        "descricao": "Ajuda médica urgente",
-        "categoria": "Saúde",
+        "descricao": "Precisamos de roupas de frio",
+        "tipo": "Roupas",
         "usuario": "joao123",
         "latitude": -23.5505,
-        "longitude": -46.6333
+        "longitude": -46.6333,
+        "data": "22/04/2025 11:09",
+        "status": "Pendente"
     },
     {
         "id": 2,
-        "descricao": "Necessita de alimentos",
-        "categoria": "Alimentos",
+        "descricao": "Precisamos de alimentos",
+        "tipo": "Alimentos",
         "usuario": "maria456",
         "latitude": -23.5510,
-        "longitude": -46.6340
+        "longitude": -46.6340,
+        "data": "14/05/2025 21:03",
+        "status": "Pendente"
     }
 ]
 
