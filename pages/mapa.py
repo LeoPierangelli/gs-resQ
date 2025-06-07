@@ -6,6 +6,12 @@ from datetime import datetime
 from geopy.geocoders import Nominatim
 
 st.title("Mapa")
+
+# Verificar se o usuário está logado
+if 'usuario_logado' not in st.session_state:
+    st.warning("Por favor, faça login para acessar o mapa.")
+    st.stop()
+
 st.write(f"Bem-vindo, {st.session_state['usuario_logado']}!")
 
 # Criar duas colunas: uma para o mapa e outra para o formulário
